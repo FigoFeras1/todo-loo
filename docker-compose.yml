@@ -1,0 +1,29 @@
+version: "3"
+services:
+  app:
+    container_name: server
+    restart: always
+    build: ./server
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/app
+    links:
+      - mongo
+  client:
+    container_name: client
+    restart: always
+    build: ./client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+volumes:
+      mongodb:
