@@ -6,8 +6,8 @@ Yet another todo app, but with a fun name.
 
 ### Prerequisites
 
-- [git](https://git-scm.com/)
-- [docker](https://www.docker.com/)
+- [Git](https://git-scm.com/)
+- [Docker](https://www.docker.com/)
 
 ### Installation
 
