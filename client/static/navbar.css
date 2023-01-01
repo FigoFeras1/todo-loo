@@ -1,0 +1,60 @@
+.navbar {
+  display: flex;
+  margin: 0;
+  height: 2.25rem;
+  padding: 0.25rem 0.25rem;
+  align-items: center;
+  background-color: #21222a;
+}
+
+.nav--text {
+  margin: 0;
+  margin-right: auto;
+  padding-left: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.nav--button {
+  cursor: pointer;
+  background: #21222a;
+  border: transparent;
+  color: white;
+  font-weight: 500;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+.nav--button:hover {
+  background: #34353b;
+  height: 100%;
+}
+
+.nav--button::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 0.075rem;
+  font-weight: 500;
+  bottom: 0.2rem;
+  left: 0;
+  background-color: #51afef;
+  transition: transform 0.25s ease-out;
+}
+
+.nav--button:hover::after {
+  transform: scaleX(1);
+}
+.nav--login {
+  height: 100%;
+  padding-left: 1rem;
+  padding-right: 2rem;
+}
+
+.nav--register {
+  height: 100%;
+  padding-left: 1rem;
+  padding-right: 2rem;
+}
