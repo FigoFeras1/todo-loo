@@ -1,4 +1,4 @@
-## About The Project
+## About This Project
 
 Yet another todo app, but with a fun name.
 

@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "api",
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon src/server.js"
