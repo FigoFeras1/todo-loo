@@ -1,4 +1,4 @@
-.login--main {
+.form--main {
   display: flex;
   /* align-items: center; */
   justify-content: center;
@@ -6,7 +6,7 @@
   font-size: 2.25rem;
 }
 
-.login--input {
+.form--input {
   border-bottom: 0.125rem solid #a8b2bb;
   border-top: none;
   border-left: none;
@@ -19,12 +19,12 @@
   margin-bottom: 2rem;
 }
 
-.login--input:focus {
+.form--input:focus {
   outline: none;
   caret-color: aliceblue;
 }
 
-.login--button {
+.form--button {
   cursor: pointer;
   background: #282d35;
   border: transparent;
@@ -36,12 +36,12 @@
   position: relative;
 }
 
-.login--button:hover {
+.form--button:hover {
   background: #34353b;
   height: 100%;
 }
 
-.login--button::after {
+.form--button::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -54,23 +54,23 @@
   transition: transform 0.25s ease-out;
 }
 
-.login--button:hover::after {
+.form--button:hover::after {
   transform: scaleX(1);
 }
 
-.login--title {
+.form--title {
   display: flex;
   font-size: 2rem;
   padding-top: 4rem;
   text-decoration: underline;
 }
 
-.login--error_message {
+.form--error_message {
   font-size: 1rem;
   color: #ff6c6b;
 }
 
-.login--input_error {
+.form--input_error {
   border-bottom: 0.125rem solid #ff6c6b;
   border-top: none;
   border-left: none;
@@ -83,11 +83,11 @@
   margin-bottom: 2rem;
 }
 
-.login--input_error::placeholder {
+.form--input_error::placeholder {
   color: #ff6c6b;
 }
 
-.login--input_error:focus {
+.form--input_error:focus {
   outline: none;
   caret-color: aliceblue;
 }

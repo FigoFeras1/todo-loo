@@ -1,105 +1,88 @@
-import { useEffect } from "react";
 import { useState } from "react";
 
-import "../../static/login.css";
-import { json } from "react-router-dom";
+import "../../static/form.css";
 
 export default function Login() {
-  const [user, setUser] = useState({
-    username: "default",
-    password: "default",
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
   });
 
-  function callApi() {
-    console.log(user);
-    const res = fetch("http://api:5000/login", {
+  const [hasError, setHasError] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (formData.username === "") {
+      setHasError(() => true);
+      return;
+    }
+
+    if (formData.password === "") {
+      setHasError(true);
+      return;
+    }
+
+    fetch("http://localhost:5000/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    })
-      .then(() => console.log("login request sent."))
-      .catch((err) => console.log(err));
+      body: JSON.stringify(formData),
+    }).then(console.log("login request sent."));
   }
 
-  function handleSubmit(event) {
-    const { username, password } = event.target;
+  function handleChange(e) {
+    const { name, value } = e.target;
 
-    if (username === "") {
-      console.log("no username provided");
-      return;
-    }
+    if (hasError) setHasError(false);
 
-    if (password === "") {
-      console.log("no password provided");
-      return;
-    }
-
-    async function loginUser() {
-      const res = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      })
-        .then(() => console.log("login request sent."))
-        .catch((err) => console.log(err));
-
-      await res
-        .json()
-        .then((body) => console.log(`login request response body: ${body}`));
-    }
-
-    // loginUser();
-    callApi();
-  }
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    console.log(`name: ${name}, value: ${value}`);
-
-    setUser((prevUser) => ({
-      ...prevUser,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
-
-    console.log(user);
   }
 
   return (
     <>
-      <div className="login--main">
+      <div className="form--main">
         <br />
         <br />
-        <form
-          onSubmit={handleSubmit}
-          className="login--form"
-          name="login--form"
-          // method="POST"
-          // action="/api/login"
-          id="login--form"
-        >
-          <label htmlFor="username" className="login--title">
-            Login
-          </label>
+        <form onSubmit={handleSubmit} className="form--form" name="form--form">
+          <label className="form--title">Login</label>
+          {hasError ? (
+            <label className="form--error_message">
+              Please fill out all the fields.
+            </label>
+          ) : (
+            <label></label>
+          )}
           <input
             type="text"
-            value={user.username}
+            value={formData.username}
             onChange={handleChange}
             name="username"
-            className="login--input"
+            className={
+              hasError && formData.username === ""
+                ? "form--input_error"
+                : "form--input"
+            }
             placeholder="Username"
-            required={true}
           />
           <input
             type="password"
-            value={user.password}
+            value={formData.password}
             onChange={handleChange}
             name="password"
-            className="login--input"
+            className={
+              hasError && formData.username === ""
+                ? "form--input_error"
+                : "form--input"
+            }
             placeholder="Password"
-            required={true}
           />
           <div>
-            <button className="login--button">Login</button>
+            <button type="submit" className="form--button">
+              Login
+            </button>
           </div>
         </form>
       </div>
