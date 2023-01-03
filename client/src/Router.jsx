@@ -1,34 +1,24 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "./components/Login";
-import Register from "./components/Register";
 import Form from "./components/Form";
 
 export function Router() {
+  const loginComponent = (
+    <Form type="login" formData={{ username: "", password: "" }} />
+  );
+  const registerComponent = (
+    <Form
+      type="register"
+      formData={{ username: "", email: "", password: "", confirmPassword: "" }}
+    />
+  );
+
   return (
     <>
       <Routes>
-        {/* <Route path="/" element={<Login />} /> */}
-        <Route
-          path="/"
-          element={<Form formData={{ username: "", password: "" }} />}
-        />
-        <Route path="/login" element={<Login />} />
-        {/* <Route path="/register" element={<Register />} /> */}
-        <Route
-          path="/register"
-          element={
-            <Form
-              type="Register"
-              formData={{
-                username: "",
-                email: "",
-                password: "",
-                confirmPassword: "",
-              }}
-            />
-          }
-        />
+        <Route path="/" element={loginComponent} />
+        <Route path="/login" element={loginComponent} />
+        <Route path="/register" element={registerComponent} />
       </Routes>
     </>
   );

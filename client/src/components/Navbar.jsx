@@ -16,7 +16,10 @@ export default function Navbar() {
         </button>
       </div>
       <div className="nav--register">
-        <button className="nav--button" onClick={() => navigate("/register")}>
+        <button
+          className="nav--button"
+          onClick={() => navigate("/register")}
+        >
           Register
         </button>
       </div>

@@ -5,33 +5,33 @@ import "../../static/form.css";
 export default function Form(props) {
   const [formData, setFormData] = useState(props.formData);
   const [hasError, setHasError] = useState(false);
-  const [inputFields, setInputFields] = useState(() => {
-    let inputFields = [];
+  /* TODO: Consider making the inputFields have an error field, i.e.
+    inputFields = { jsxElement: <input>..., error: "" || "<error message>"}  */
+  const [inputFields, setInputFields] = useState([]);
 
-    for (var key in formData) {
-      if (formData.hasOwnProperty(key)) {
-        const value = formData[key];
+  console.log(`Form: ${JSON.stringify(formData)}, ${hasError}`);
 
-        inputFields.push(
-          <input
-            type={key}
-            value={formData.value}
-            onChange={handleChange}
-            name={key}
-            key={key}
-            className={
-              hasError && value === "" ? "form--input_error" : "form--input"
-            }
-            placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
-          />
-        );
-      }
-    }
+  useEffect(() => {
+    setFormData(props.formData);
+    setHasError(false);
+  }, [props.type]);
 
-    return inputFields;
-  });
+  useEffect(() => {
+    initInputFields();
+  }, [formData]);
+
+  useEffect(() => {
+    initInputFields();
+  }, [hasError]);
+
+  const titleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
   function initInputFields() {
+    console.log(
+      `initInputFields: Form: ${props.type}, FormData: ${JSON.stringify(
+        formData
+      )}`
+    );
     let inputFields = [];
 
     for (var key in formData) {
@@ -48,7 +48,9 @@ export default function Form(props) {
             className={
               hasError && value === "" ? "form--input_error" : "form--input"
             }
-            placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+            placeholder={
+              key === "confirmPassword" ? "Confirm Password" : titleCase(key)
+            }
           />
         );
       }
@@ -57,13 +59,12 @@ export default function Form(props) {
     setInputFields(inputFields);
   }
 
-  useEffect(() => initInputFields(), [hasError]);
-
   function handleSubmit(e) {
     e.preventDefault();
     let hasError = false;
 
     for (var key in formData) {
+      console.log(`handleSubmit: ${key}`);
       if (formData.hasOwnProperty(key) && formData[key] === "") {
         hasError = true;
       }
@@ -98,7 +99,7 @@ export default function Form(props) {
         <br />
         <br />
         <form onSubmit={handleSubmit} className="form--form" name="form--form">
-          <label className="form--title">{props.type}</label>
+          <label className="form--title">{titleCase(props.type)}</label>
           {hasError ? (
             <label className="form--error_message">
               Please fill out all the fields.
@@ -109,7 +110,7 @@ export default function Form(props) {
           {inputFields}
           <div>
             <button type="submit" className="form--button">
-              {props.type}
+              {titleCase(props.type)}
             </button>
           </div>
         </form>

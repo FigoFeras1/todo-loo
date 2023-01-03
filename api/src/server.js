@@ -1,3 +1,4 @@
+const authRouter = require("./routes/authRoutes");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -15,24 +16,11 @@ mongoose
   .then(() => console.log("MongoDB Connection Successful."))
   .catch((err) => console.log(err));
 
-app.post("/login", (req, res) => {
-  console.log(`Username: ${req.body.username}\nPassword: ${req.body.password}`);
-  res.end(JSON.stringify(req.body));
-
-  // res.redirect("/");
-});
-
-app.post("/register", (req, res) => {
-  console.log(
-    `Username: ${req.body.username}\nEmail: ${req.body.email}\nPassword: ${req.body.password}\nConfirm: ${req.body.confirmPassword}`
-  );
-  res.end(JSON.stringify(req.body));
-  // res.redirect("/");
-});
-
 app.get("/", (req, res) => {
   console.log(`Username: ${req.body.username}\nPassword: ${req.body.password}`);
 });
+
+app.use("/", authRouter);
 
 const port = 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
