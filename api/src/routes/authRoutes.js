@@ -24,7 +24,7 @@ router.post("/login", (req, res) => {
               username: user.username,
             },
             "RANDOM-TOKEN",
-            { expiresIn: "24h" }
+            { expiresIn: "60" }
           );
 
           res.status(200).send({

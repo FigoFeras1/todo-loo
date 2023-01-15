@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 import "../../static/form.css";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 export default function Form(props) {
+  /* Idea: Try using this component as a 'parent' component for Login and Register  */
   const [formData, setFormData] = useState(props.formData);
   const [hasError, setHasError] = useState(false);
   /* TODO: Consider making the inputFields have an error field, i.e.
     inputFields = { jsxElement: <input>..., error: "" || "<error message>"}  */
   const [inputFields, setInputFields] = useState([]);
+
+  const navigate = useNavigate();
 
   console.log(`Form: ${JSON.stringify(formData)}, ${hasError}`);
 
@@ -18,13 +24,42 @@ export default function Form(props) {
 
   useEffect(() => {
     initInputFields();
-  }, [formData]);
+  }, [formData, hasError]);
 
-  useEffect(() => {
-    initInputFields();
-  }, [hasError]);
+  // useEffect(() => {
+  //   initInputFields();
+  // }, [hasError]);
 
   const titleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+  return (
+    <>
+      <div className="form--main">
+        <br />
+        <br />
+        <form onSubmit={handleSubmit} className="form--form" name="form--form">
+          <label className="form--title">{titleCase(props.type)}</label>
+          {hasError ? (
+            <label className="form--error_message">
+              Please fill out all the fields.
+            </label>
+          ) : (
+            <label></label>
+          )}
+          {inputFields}
+          <div>
+            <button
+              type="submit"
+              onSubmit={handleSubmit}
+              className="form--button"
+            >
+              {titleCase(props.type)}
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
 
   function initInputFields() {
     console.log(
@@ -40,7 +75,7 @@ export default function Form(props) {
 
         inputFields.push(
           <input
-            type={key}
+            type={key === "confirmPassword" ? "password" : key}
             value={formData.value}
             onChange={handleChange}
             name={key}
@@ -59,12 +94,11 @@ export default function Form(props) {
     setInputFields(inputFields);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     let hasError = false;
 
     for (var key in formData) {
-      console.log(`handleSubmit: ${key}`);
       if (formData.hasOwnProperty(key) && formData[key] === "") {
         hasError = true;
       }
@@ -74,12 +108,12 @@ export default function Form(props) {
       setHasError(hasError);
       return;
     }
+    await axios
+      .post(`http://localhost:5000/${props.type}`, formData)
+      .then((result) => localStorage.setItem("token", result.data.token))
+      .catch((err) => console.log(err));
 
-    fetch(`http://localhost:5000/${props.type}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    }).then(console.log(`${props.type} request sent.`));
+    navigate("/");
   }
 
   function handleChange(e) {
@@ -92,29 +126,4 @@ export default function Form(props) {
       [name]: value,
     }));
   }
-
-  return (
-    <>
-      <div className="form--main">
-        <br />
-        <br />
-        <form onSubmit={handleSubmit} className="form--form" name="form--form">
-          <label className="form--title">{titleCase(props.type)}</label>
-          {hasError ? (
-            <label className="form--error_message">
-              Please fill out all the fields.
-            </label>
-          ) : (
-            <label></label>
-          )}
-          {inputFields}
-          <div>
-            <button type="submit" className="form--button">
-              {titleCase(props.type)}
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
-  );
 }

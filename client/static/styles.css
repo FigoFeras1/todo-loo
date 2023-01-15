@@ -1,11 +1,46 @@
 html {
-    height: 100%;
-    color: #e3e3e3;
+  color: aliceblue;
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    font-size: 1rem;
-    background-color: #282D35;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  background-color: #282d35;
+  height: 100%;
+}
+
+button {
+  cursor: pointer;
+  background: #21222a;
+  border: none;
+  color: white;
+  font-weight: 500;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+button:hover {
+  background: #34353b;
+  height: 100%;
+  border: none;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 0.075rem;
+  font-weight: 500;
+  bottom: 0rem;
+  left: 0;
+  background-color: #51afef;
+  transition: transform 0.25s ease-out;
+}
+
+button:hover::after {
+  transform: scaleX(1);
 }

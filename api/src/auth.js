@@ -4,7 +4,7 @@ module.exports = async (req, res, next) => {
   try {
     const token = await req.headers.authorization.split(" ")[1];
     req.user = jwt.verify(token, "RANDOM-TOKEN");
-    console.log(JSON.stringify(req.user));
+    console.log(JSON.stringify(req));
 
     next();
   } catch (err) {

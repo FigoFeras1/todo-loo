@@ -1,0 +1,111 @@
+.home {
+  height: 100%;
+  display: flex;
+}
+
+.home--sidebar {
+  height: 100%;
+  width: 15%;
+}
+
+.home--header {
+  text-align: left;
+  margin-left: 3rem;
+}
+
+.home--main_content {
+  height: 100%;
+  width: 100%;
+}
+
+.add_todo {
+  width: 95%;
+  color: aliceblue;
+  background-color: #21222a;
+  display: inline-block;
+  border: solid 1px #21222a;
+  border-radius: 0.25rem;
+  margin-left: 2.25rem;
+  overflow: hidden;
+}
+
+.todo_container {
+  /* width: 100%; */
+  height: 100%;
+  max-height: inherit;
+  background: transparent;
+  border: none;
+  border-bottom: solid 1px #4d4c4a;
+  display: flex;
+  align-items: center;
+  text-indent: 0.5rem;
+}
+
+.todo_input_container {
+  overflow: hidden;
+  height: 100%;
+  max-height: inherit;
+  min-width: inherit;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.todo_input {
+  padding-top: 1rem;
+  border: none;
+  background: #21222a;
+  height: 100%;
+  max-height: inherit;
+  width: 100%;
+  font-size: 1rem;
+  color: aliceblue;
+  text-indent: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.todo_input:focus {
+  outline: none;
+  caret-color: aliceblue;
+}
+
+.todo_input::placeholder {
+  color: #51afef;
+}
+
+.checkbox_container {
+  display: inline-block;
+}
+
+.todo_checkbox {
+  width: 1.1rem;
+  height: 1.1rem;
+  background-color: #21222a;
+  border-radius: 50%;
+  border: 1px solid #51afef;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.todo_checkbox:checked {
+  background-color: #51afef;
+  border: 2px solid #21222a;
+  outline: 1px solid #51afef;
+}
+
+.todo_button_container {
+  border: none;
+  text-align: right;
+  width: 100%;
+  max-width: inherit;
+  background-color: #21222a;
+  display: inline-block;
+  padding: 0.8rem 0rem 0.8rem 0rem;
+}
+
+.createTodo--add_todo_button {
+  height: 100%;
+  max-height: inherit;
+  font-size: 1rem;
+}
