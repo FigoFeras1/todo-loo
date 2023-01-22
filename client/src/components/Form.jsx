@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import "../../static/form.css";
+import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
@@ -12,6 +13,7 @@ export default function Form(props) {
   /* TODO: Consider making the inputFields have an error field, i.e.
     inputFields = { jsxElement: <input>..., error: "" || "<error message>"}  */
   const [inputFields, setInputFields] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,10 +36,16 @@ export default function Form(props) {
 
   return (
     <>
+      <Navbar loading={loading} />
       <div className="form--main">
         <br />
         <br />
-        <form onSubmit={handleSubmit} className="form--form" name="form--form">
+        <form
+          method="POST"
+          onSubmit={handleSubmit}
+          className="form--form"
+          name="form--form"
+        >
           <label className="form--title">{titleCase(props.type)}</label>
           {hasError ? (
             <label className="form--error_message">
@@ -70,7 +78,7 @@ export default function Form(props) {
     let inputFields = [];
 
     for (var key in formData) {
-      if (formData.hasOwnProperty(key)) {
+      if (formData?.hasOwnProperty(key)) {
         const value = formData[key];
 
         inputFields.push(
@@ -108,12 +116,22 @@ export default function Form(props) {
       setHasError(hasError);
       return;
     }
+
+    setLoading(true);
+
     await axios
       .post(`http://localhost:5000/${props.type}`, formData)
-      .then((result) => localStorage.setItem("token", result.data.token))
+      .then((result) => {
+        localStorage.setItem("userId", result.data.userId);
+        localStorage.setItem("token", result.data.token);
+      })
       .catch((err) => console.log(err));
 
-    navigate("/");
+    setLoading(false);
+
+    navigate("/", { replace: true });
+    window.history.replaceState(null, "", "/");
+    window.location.href = "/";
   }
 
   function handleChange(e) {

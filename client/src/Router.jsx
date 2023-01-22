@@ -16,11 +16,19 @@ export function Router() {
   );
 
   const authenticated = localStorage.getItem("token") !== null;
+  console.log(
+    `token: ${localStorage.getItem("token")}\nauthenticated: ${authenticated}`
+  );
+  console.log(JSON.stringify(localStorage.getItem("user")));
 
   return (
     <>
       <Routes>
         <Route path="/" element={authenticated ? <Home /> : <Hero />} />
+        <Route
+          path="/:todoList"
+          element={authenticated ? <Home /> : <Hero />}
+        />
         <Route
           path="/login"
           element={authenticated ? <Navigate to="/" /> : loginComponent}
@@ -29,7 +37,6 @@ export function Router() {
           path="/register"
           element={authenticated ? <Navigate to="/" /> : registerComponent}
         />
-        <Route path="/logout" element={<Navigate to="/" />} />
       </Routes>
     </>
   );

@@ -1,6 +1,7 @@
 import CreateTodo from "./CreateTodo";
 import Todo from "./Todo";
 import "../../static/home.css";
+import CompletedTodo from "./CompletedTodo";
 
 export default function MainContent() {
   return (
@@ -11,7 +12,7 @@ export default function MainContent() {
       <div>
         <CreateTodo />
       </div>
-      <br/>
+      <br />
       <div className="add_todo">
         <Todo text="Task 1" />
         <Todo text="Task 2" />
@@ -22,6 +23,7 @@ export default function MainContent() {
         <Todo text="Task 7" />
         <Todo text="Task 8" />
       </div>
+      <CompletedTodo />
     </>
   );
 }

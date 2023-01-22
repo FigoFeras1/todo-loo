@@ -4,7 +4,11 @@ export default function SidebarElement(props) {
   const [rightClicked, setRightClicked] = useState(false);
 
   return (
-    <a href="#" onContextMenu={handleContextMenu} id="sidebarElement">
+    <a
+      href={props.text.toLowerCase()}
+      onContextMenu={handleContextMenu}
+      id="sidebarElement"
+    >
       {props.text}
     </a>
   );

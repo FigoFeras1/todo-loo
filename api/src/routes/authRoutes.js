@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 router.post("/login", (req, res) => {
-  console.log(JSON.stringify("user"));
   User.findOne({ username: req.body.username })
     .then((user) => {
       bcrypt
@@ -24,11 +23,12 @@ router.post("/login", (req, res) => {
               username: user.username,
             },
             "RANDOM-TOKEN",
-            { expiresIn: "60" }
+            { expiresIn: 60 }
           );
 
           res.status(200).send({
             message: "Login successful",
+            userId: user._id,
             username: user.username,
             token,
           });

@@ -16,6 +16,34 @@
 .home--main_content {
   height: 100%;
   width: 100%;
+  overflow: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  max-height: 1px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  max-height: 1px;
+  border-radius: 1.25rem;
+  background: #282d35;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  max-height: 1px;
+  border-radius: 1.25rem;
+  background: #555555;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  max-height: 1px;
+  border-radius: 1.25rem;
+  background: #666666;
 }
 
 .add_todo {
@@ -108,4 +136,30 @@
   height: 100%;
   max-height: inherit;
   font-size: 1rem;
+}
+
+.completed {
+  position: relative;
+  max-width: inherit;
+  background-color: #282d35;
+  height: auto;
+  width: 95%;
+  display: inline-block;
+  border-bottom: solid 1px #4d4c4a;
+  border-radius: 0.25rem;
+  margin-left: 2.25rem;
+}
+
+.completed--header {
+  border: none;
+  text-align: left;
+  width: 100%;
+  max-width: inherit;
+  background-color: #282d35;
+  display: inline-block;
+  padding: 0.8rem 0rem 0.8rem 0rem;
+}
+
+.completed--button {
+  font-size: 20px;
 }

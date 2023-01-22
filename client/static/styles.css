@@ -16,7 +16,6 @@ button {
   background: #21222a;
   border: none;
   color: white;
-  font-weight: 500;
   height: 100%;
   display: inline-block;
   position: relative;
@@ -44,3 +43,5 @@ button::after {
 button:hover::after {
   transform: scaleX(1);
 }
+
+
